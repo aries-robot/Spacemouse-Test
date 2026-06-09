@@ -6,7 +6,7 @@ This repository is a smoke test for checking 3Dconnexion SpaceMouse connectivity
 
 ```bash
 uv venv
-uv sync
+uv pip install "pyspacemouse>=2.0.0,<3.0.0"
 ```
 
 ## Linux hidraw Permissions

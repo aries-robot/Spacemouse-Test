@@ -1,5 +1,6 @@
 # Ignore local uv virtualenv.
 .venv/
+uv.lock
 
 # Ignore Python runtime caches.
 __pycache__/
