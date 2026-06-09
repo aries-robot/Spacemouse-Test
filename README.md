@@ -1,23 +1,39 @@
 # SpaceMouse pyspacemouse test
 
+Tested only on Ubuntu 22.04.
+
 This repository is a smoke test for checking 3Dconnexion SpaceMouse connectivity and input with `pyspacemouse` in a `uv` virtual environment.
 
 ## Installation
 
+On Debian/Ubuntu, install the native HIDAPI runtime first:
+
+```bash
+sudo apt-get update
+sudo apt-get install libhidapi-hidraw0
+```
+
+Then create the Python environment and install the Python dependency:
+
 ```bash
 uv venv
-uv pip install "pyspacemouse>=2.0.0,<3.0.0"
+uv sync
 ```
 
 ## Linux hidraw Permissions
 
-On Linux, if `/dev/hidraw*` is owned as `root root 600` or `root root 660`, device detection may work but opening the device will fail. Immediately after installation, install the provided udev rule and reconnect the device.
+On Linux, if `/dev/hidraw*` is owned as `root root 600` or `root root 660`, device detection may work but opening the device will fail. Immediately after installation, add the current user to `plugdev`, install the provided 3Dconnexion-specific udev rule, and reconnect the device.
 
 ```bash
+sudo groupadd -f plugdev
+sudo usermod -aG plugdev "$USER"
 sudo cp udev/99-3dconnexion-spacemouse.rules /etc/udev/rules.d/
 sudo udevadm control --reload-rules
 sudo udevadm trigger
+newgrp plugdev
 ```
+
+The provided udev rule is a narrower alternative to a generic `hidraw*` permission rule: it only matches known 3Dconnexion device vendor/product IDs.
 
 ## Running
 
