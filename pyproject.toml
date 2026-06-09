@@ -1,0 +1,13 @@
+# Define minimal uv project metadata.
+[project]
+name = "spacemouse-test"
+version = "0.1.0"
+description = "pyspacemouse smoke test for 3Dconnexion SpaceMouse devices"
+requires-python = ">=3.8"
+dependencies = [
+    "pyspacemouse>=2.0.0,<3.0.0",
+]
+
+# Keep this workspace as dependency-only, not an installable package.
+[tool.uv]
+package = false

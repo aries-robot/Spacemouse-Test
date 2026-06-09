@@ -1,0 +1,10 @@
+# Ignore local uv virtualenv.
+.venv/
+
+# Ignore Python runtime caches.
+__pycache__/
+*.py[cod]
+
+# Ignore common local test caches.
+.pytest_cache/
+.ruff_cache/
